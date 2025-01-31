@@ -13,5 +13,5 @@ class TemplateDirectory(models.Model):
 
     name = models.CharField(max_length=255)
     uuid = models.CharField(max_length=36, default=uuid.uuid4, unique=True)
-    parent_id = models.ForeignKey(to='self', on_delete=models.CASCADE, null=True)
-    template_group_id = models.ForeignKey(to=TemplateGroup, on_delete=models.RESTRICT)
+    parent_directory = models.ForeignKey(to='self', on_delete=models.CASCADE, null=True)
+    template_group = models.ForeignKey(to=TemplateGroup, on_delete=models.RESTRICT)

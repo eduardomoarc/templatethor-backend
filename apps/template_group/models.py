@@ -13,4 +13,4 @@ class TemplateGroup(models.Model):
     name = models.CharField(max_length=255)
     uuid = models.CharField(max_length=36, default=uuid.uuid4, unique=True)
     dataset = models.TextField(blank=True)
-    user_id = models.ForeignKey(to=User, on_delete=models.RESTRICT)
+    user = models.ForeignKey(to=User, on_delete=models.RESTRICT)
