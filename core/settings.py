@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'apps.authentication',
     'apps.template_group',
     'apps.template_directory',
     'apps.template_file',
@@ -51,12 +53,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_RENDERER_CLASSES': [
-#         'rest_framework.renderers.JSONRenderer',
-#         'rest_framework.renderers.BrowsableAPIRenderer',
-#     ],
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 ROOT_URLCONF = 'core.urls'
 
