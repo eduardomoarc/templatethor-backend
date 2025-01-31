@@ -11,9 +11,9 @@ from apps.template_group.serializers import TemplateGroupSerializer
 class TemplateGroupApiView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, pk=None):
-        if pk is not None:
-            template_group = get_object_or_404(TemplateGroup, pk=pk)
+    def get(self, request, uuid=None):
+        if uuid is not None:
+            template_group = get_object_or_404(TemplateGroup, uuid=uuid)
             serializer = TemplateGroupSerializer(template_group)
             return Response(serializer.data)
         template_groups = TemplateGroup.objects.all()
@@ -27,8 +27,8 @@ class TemplateGroupApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk):
-        template_group = get_object_or_404(TemplateGroup, pk=pk)
+    def put(self, request, uuid):
+        template_group = get_object_or_404(TemplateGroup, uuid=uuid)
         serializer = TemplateGroupSerializer(template_group, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()

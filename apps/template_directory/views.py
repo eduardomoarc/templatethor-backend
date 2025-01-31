@@ -11,9 +11,9 @@ from apps.template_directory.serializers import TemplateDirectorySerializer
 class TemplateDirectoryAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, pk=None):
-        if pk is not None:
-            template_directory = get_object_or_404(TemplateDirectory, pk=pk)
+    def get(self, request, uuid=None):
+        if uuid is not None:
+            template_directory = get_object_or_404(TemplateDirectory, uuid=uuid)
             serializer = TemplateDirectorySerializer(template_directory)
             return Response(serializer.data)
         template_directories = TemplateDirectory.objects.all()
@@ -27,8 +27,8 @@ class TemplateDirectoryAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk):
-        template_directory = get_object_or_404(TemplateDirectory, pk=pk)
+    def put(self, request, uuid):
+        template_directory = get_object_or_404(TemplateDirectory, uuid=uuid)
         serializer = TemplateDirectorySerializer(template_directory, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
