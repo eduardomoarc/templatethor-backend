@@ -1,0 +1,61 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env
+
+# Django-related
+*.log
+*.pot
+*.pyc
+
+# SQLite database
+*.sqlite3
+*.db
+
+# Media / Static files
+/media/
+/static/
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.iml
+
+# Secrets and environment variables
+.env
+*.env
+config/settings/local.py
+config/settings/.local/
+
+# Migrations (optional, only if you reset them frequently)
+**/migrations/*.pyc
+**/migrations/*.pyo
+
+# Node / Frontend (if using)
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+node_modules/
+
+# Compiled code
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Gunicorn
+gunicorn.pid
+gunicorn.log
+
+# Docker
+*.pid
+*.sock
+docker-compose.override.yml
