@@ -6,4 +6,4 @@ from apps.template_group.models import TemplateGroup
 class TemplateGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = TemplateGroup
-        fields = '__all__'
+        fields = ['name', 'uuid', 'dataset']
