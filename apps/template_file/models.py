@@ -11,8 +11,10 @@ class TemplateFile(models.Model):
     def __str__(self):
         return self.name
 
+    uuid = models.CharField(max_length=36, default=uuid.uuid4, unique=True)
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    uuid = models.CharField(max_length=36, default=uuid.uuid4, unique=True)
     content = models.TextField()
     template_directory = models.ForeignKey(to=TemplateDirectory, on_delete=models.RESTRICT)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
