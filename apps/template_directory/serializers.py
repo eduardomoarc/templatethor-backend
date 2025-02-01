@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
 
 from apps.template_directory.models import TemplateDirectory
+from apps.template_file.serializers import TemplateFileSerializer
 from apps.template_group.models import TemplateGroup
 
 
@@ -11,10 +12,12 @@ class TemplateDirectorySerializer(serializers.ModelSerializer):
     updated_at = serializers.DateTimeField(read_only=True)
     template_group_uuid = serializers.CharField(write_only=False, source="template_group.uuid")
     parent_directory_uuid = serializers.CharField(source="parent_directory.uuid", required=False, allow_null=True)
+    files = TemplateFileSerializer(source='templatefile_set', many=True, read_only=True)
+    subdirectories = serializers.SerializerMethodField()
 
     class Meta:
         model = TemplateDirectory
-        fields = ['uuid', 'name', 'parent_directory_uuid', 'template_group_uuid', 'created_at', 'updated_at']
+        fields = ['uuid', 'name', 'parent_directory_uuid', 'template_group_uuid', 'subdirectories', 'files', 'created_at', 'updated_at']
 
     def create(self, validated_data):
         validated_data['template_group'] = self._get_template_group_from_data(validated_data)
@@ -29,6 +32,9 @@ class TemplateDirectorySerializer(serializers.ModelSerializer):
             instance.parent_directory = self._get_parent_directory_from_data(validated_data)
         return super().update(instance, validated_data)
 
+    def get_subdirectories(self, obj):
+        subdirs = TemplateDirectory.objects.filter(parent_directory=obj)
+        return TemplateDirectorySerializer(subdirs, many=True).data
     @staticmethod
     def _get_template_group_from_data(validated_data):
         template_group_data = validated_data.pop('template_group', {})
