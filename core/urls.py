@@ -22,4 +22,5 @@ urlpatterns = [
     path('api/', include('apps.template_group.urls')),
     path('api/', include('apps.template_directory.urls')),
     path('api/', include('apps.template_file.urls')),
+    path('', include('apps.frontend.urls')),
 ]

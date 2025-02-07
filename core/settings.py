@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.template_group',
     'apps.template_directory',
     'apps.template_file',
+    'apps.frontend',
 ]
 
 MIDDLEWARE = [
